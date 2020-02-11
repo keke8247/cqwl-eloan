@@ -1,0 +1,22 @@
+# 订单服务
+server:
+  port: 10082
+spring:
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  # 配置Jpa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: true
+#mybatis 对应的pojo类
+mybatis:
+  type-aliases-package: com.rongdu.eloan.domain
+  mapper-locations: classpath:config/mapper/*.xml
+

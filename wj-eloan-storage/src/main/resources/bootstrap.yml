@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: wj-eloan-storage-service
+  # 配置nacos
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1
+        namespace: public
+        group: SEATA_GROUP
+      discovery:
+        server-addr: 127.0.0.1
+        namespace: public
+        enabled: true
+    alibaba:
+      seata:
+        tx-service-group: ${spring.application.name}

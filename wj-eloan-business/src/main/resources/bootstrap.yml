@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: wj-eloan-business-service
+
+  # 配置Nacos
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1
+        namespace: public
+        group: SEATA_GROUP
+      discovery:
+        server-addr: localhost
+        namespace: public
+        enabled: true
+    alibaba:
+      seata:
+        tx-service-group: ${spring.application.name}
+    # 配置sentinel 页面监控
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+# 开启sentinel 限流熔断保护
+feign:
+  sentinel:
+    enabled: true
