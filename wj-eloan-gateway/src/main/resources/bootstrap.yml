@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: wj-elaon-gateway
+  cloud:
+    nacos:
+      # 使用Nacos的服务注册与发现功能
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: business-router  #这个ID 命名随意, 语义清楚 所有路由定义中唯一即可 因为要做 business服务的路由 所有 用business-router做ID
+        uri: lb://wj-eloan-business-service # lb:// 为固定写法,表示开启负载均衡(loadBalance), wj-eloan-business-service为 服务在nacos中注册的服务名称
+        predicates:
+        - Path=/seata/** # 使用"Path Route Predicate Factory"，规则为/seata开头的任意URI
+        filters:  # 自定义限流策略
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter.replenishRate: 1
+            redis-rate-limiter.burstCapacity: 5
+            key-resolver: '#{@ipKeyResolver}' #限流resolver 选用自定义的 Ip限流策略
+      default-filters:  # 默认限流处理
+      - name: Hystrix
+        args:
+          name: default
+          fallbackUri: 'forward:/defaultFallback'
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 2000 #设置响应超时时间,触发熔断策略
