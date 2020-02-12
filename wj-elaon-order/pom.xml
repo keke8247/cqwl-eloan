@@ -22,6 +22,26 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!--seata 分布式事务控制-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+            <!--去除 这里内嵌的0.7.1版本的seata-->
+            <exclusions>
+                <exclusion>
+                    <groupId>io.seata</groupId>
+                    <artifactId>seata-all</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--引入 1.0.0 版本的 seata-->
+        <dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-all</artifactId>
+            <version>${seata-version}</version>
+        </dependency>
+
         <!--druid数据源配置-->
         <dependency>
             <groupId>com.alibaba</groupId>
