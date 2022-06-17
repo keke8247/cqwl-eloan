@@ -23,7 +23,7 @@
         <log4jdbc.version>1.16</log4jdbc.version>
         <mapstruct.version>1.2.0.Final</mapstruct.version>
         <lombok.version>1.18.10</lombok.version>
-        <fastjson.version>1.2.54</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <mybatis.version>2.1.0</mybatis.version>
         <!--引入 1.0.0 版本的seata-->
         <seata-version>1.0.0</seata-version>
